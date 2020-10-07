@@ -1,6 +1,6 @@
 # This file builds the Docker image for the CSAL Unified Development Enviroment
 
-# Use Phusion base image (minimal Docker-friendly Ubuntu)
+# Use Official Ubuntu base image
 FROM ubuntu:18.04
 
 # Set some variables
