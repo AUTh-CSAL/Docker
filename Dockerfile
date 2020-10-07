@@ -75,6 +75,7 @@ RUN mv OpenCilk-9.0.1-Linux/ /usr/local/
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.5/julia-1.5.2-linux-x86_64.tar.gz
 RUN tar xvzf julia-1.5.2-linux-x86_64.tar.gz
 RUN rm -rf julia-1.5.2-linux-x86_64.tar.gz
+RUN mv julia-1.5.2-linux-x86_64/ $HOME
 
 #RUN git clone https://github.com/assimp/assimp && cd assimp && git checkout 1427e67b54906419e9f83cc8625e2207fbb0fcd5 && mkdir build && cd build && cmake .. && make all -j 4 && make install && ln -s /assimp/build/bin/libassimp.so.5 /usr/lib/x86_64-linux-gnu/
 
