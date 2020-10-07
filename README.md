@@ -7,7 +7,7 @@ Note: This README assumes that there is already Docker installed on the host mac
 Start by downloading the content of this repo, either through `git clone https://github.com/AUTh-csal/Docker.git` or by zip download here: 
 https://github.com/AUTh-csal/Docker/archive/main.zip 
 
-Afterwards, by opening a terminal or Command Prompt, according to your host OS, navigate to the folder where the extracted data is. There you can see the following directory structure (timestamps may vary!):
+Afterwards, by opening a terminal or Command Prompt, according to your host OS, navigate to the folder where the extracted data is (default extracted folder is `Docker`). There you can see the following directory structure (timestamps may vary!):
 
 ```
 2020-09-29  08:57    <DIR>          .
