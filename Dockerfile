@@ -16,7 +16,7 @@ ENV DIR pds
 RUN apt-get update && apt-get upgrade -y
 
 # Install basic dependencies
-RUN apt-get -y install locales sudo
+RUN apt-get -y install locales sudo build-essential openssh-server
 
 # Install libraries used by DTCCore
 RUN apt-get update && apt-get install -y \
@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y \
 #    libnetcdf-c++4-dev \
     clang-format \
     clang-tidy \
+    ca-certificates \
 #    doxygen graphviz\
 #    libgeotiff-dev\
     automake\
@@ -48,7 +49,7 @@ RUN apt-get update && apt-get install -y \
 #RUN apt-get update && apt-get install -y gdal-bin
 
 # Install git with lfs support, dos2unix, nano simple editor, rsync and wget
-RUN apt-get update && apt-get install -y git git-lfs dos2unix nano rsync wget
+RUN apt-get update && apt-get install -y git git-lfs dos2unix nano rsync wget curl
 
 # Get and compile LASZip
 #RUN git clone -n https://github.com/LASzip/LASzip.git
