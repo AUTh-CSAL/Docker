@@ -88,7 +88,7 @@ VOLUME $HOME/$DIR
 WORKDIR $HOME/$DIR
 
 # Get pds code
-git clone https://github.com/AUTh-csal/pds.git
+RUN git clone https://github.com/AUTh-csal/pds.git
 
 # Generate welcome message printed at login
 COPY Welcome $HOME/.welcome
