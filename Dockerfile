@@ -76,6 +76,10 @@ RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.5/julia-1.5.2-linux-
 RUN tar xvzf julia-1.5.2-linux-x86_64.tar.gz
 RUN rm -rf julia-1.5.2-linux-x86_64.tar.gz
 
+# Get pds code
+
+git clone https://github.com/AUTh-csal/pds.git
+
 #RUN git clone https://github.com/assimp/assimp && cd assimp && git checkout 1427e67b54906419e9f83cc8625e2207fbb0fcd5 && mkdir build && cd build && cmake .. && make all -j 4 && make install && ln -s /assimp/build/bin/libassimp.so.5 /usr/lib/x86_64-linux-gnu/
 
 # Add user and change to user
