@@ -70,7 +70,7 @@ RUN apt-get update && apt-get install -y git git-lfs dos2unix nano rsync wget
 RUN wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fbeta3/OpenCilk-9.0.1-Linux.tar.gz && tar xvzf OpenCilk-9.0.1-Linux.tar.gz 
 RUN mv OpenCilk-9.0.1-Linux/ /usr/local/
 
-# Get and extract OpenCilk
+# Get and extract Julia
 
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.5/julia-1.5.2-linux-x86_64.tar.gz
 RUN tar xvzf julia-1.5.2-linux-x86_64.tar.gz
