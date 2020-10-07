@@ -1,4 +1,4 @@
-# This file builds the Docker image for the Digital Twin Cities Platform
+# This file builds the Docker image for the CSAL Unified Development Enviroment
 
 # Use Phusion base image (minimal Docker-friendly Ubuntu)
 FROM ubuntu:18.04
