@@ -3,8 +3,12 @@ Docker image for providing a unified computing system
 
 # Installation
 
-Note: This README assumes that there is already Docker installed on the host machine, either Windows, MacOS or Linux. For more info on how to obtain Docker, please visit: https://www.docker.com/products/docker-desktop
-Start by downloading the content of this repo, either through `git clone https://github.com/AUTh-csal/Docker.git` or by zip download here: 
+Note: This README assumes that there is already Docker installed on the host machine, either Windows, MacOS or Linux. For more info on how to obtain Docker, please visit:
+
+https://www.docker.com/products/docker-desktop
+
+Start by downloading the content of this repo, either through `git clone https://github.com/AUTh-csal/Docker.git` or by zip download here:
+ 
 https://github.com/AUTh-csal/Docker/archive/main.zip 
 
 Afterwards, by opening a terminal or Command Prompt, according to your host OS, navigate to the folder where the extracted data is (default extracted folder is `Docker`). There you can see the following directory structure (timestamps may vary!):
