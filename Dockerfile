@@ -42,12 +42,9 @@ RUN apt-get update && apt-get install -y \
 # Install git with lfs support, dos2unix, nano simple editor, rsync and wget
 RUN apt-get update && apt-get install -y git git-lfs dos2unix nano rsync wget curl
 
-# Get and compile VTK 7.1
-#RUN wget https://www.vtk.org/files/release/7.1/VTK-7.1.1.tar.gz && tar xvzf VTK-7.1.1.tar.gz && cd VTK-7.1.1/ && mkdir build && cd build && cmake -DVTK_Group_Rendering=OFF -DVTK_BUILD_ALL_MODULES_FOR_TESTS:BOOL=OFF -DVTK_Group_StandAlone=OFF -DModule_vtkCommonCore:BOOL=ON .. && make all -j 4 && make install
-
 # Get and extract OpenCilk
 RUN wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fbeta3/OpenCilk-9.0.1-Linux.tar.gz && tar xvzf OpenCilk-9.0.1-Linux.tar.gz 
-RUN mv OpenCilk-9.0.1-Linux/ /usr/local/
+RUN mv OpenCilk-9.0.1-Linux/ /usr/local/ && chmod g+xr /usr/local/OpenCilk-9.0.1-Linux/bin/ && chmod o+x /usr/local/OpenCilk-9.0.1-Linux/bin/
 
 # Get and extract Julia
 #RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.5/julia-1.5.2-linux-x86_64.tar.gz
