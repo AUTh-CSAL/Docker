@@ -39,8 +39,8 @@ RUN apt-get update && apt-get install -y \
     openmpi-bin\ 
     libopenmpi-dev 
 
-# Install git with lfs support, dos2unix, nano simple editor, rsync and wget
-RUN apt-get update && apt-get install -y git git-lfs dos2unix nano rsync wget curl
+# Install git with lfs support and other packages needed
+RUN apt-get update && apt-get install -y git git-lfs dos2unix nano rsync wget curl fish
 
 # Get and extract OpenCilk
 RUN wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fbeta3/OpenCilk-9.0.1-Linux.tar.gz && tar xvzf OpenCilk-9.0.1-Linux.tar.gz 
