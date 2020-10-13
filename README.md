@@ -33,7 +33,7 @@ For Windows users, navigate to the `Windows` directory and then run `hpc-build-i
 
 For Linux and MacOS users, remain in this folder, run `hpc-build-image`, `hpc-create-container` and `hpc-start-container`.
 
-## Pulling & building hello world examples for the course 050 - Parallel & Distrubuted Systems
+## Pulling & building hello world examples for the course 050 - Parallel & Distributed Systems
 
 After succesfully having built, created and ran the container, you should be able to see the following screen, aka `welcome screen`.
 
