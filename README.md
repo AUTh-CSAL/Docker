@@ -24,7 +24,7 @@ Afterwards, by opening a terminal or Command Prompt, according to your host OS, 
 2020-09-29  08:57               786 Welcome
 2020-09-29  08:57    <DIR>          Windows
 ```
-For Windows users, navigate to the `Windows` directory and then run `hpc-build-image.bat`, `hpc-create-container.bat` and `hpc-start-container.bat`. The screenshots below show the expected behavior.
+For Windows users, navigate to the `Windows` directory and then run `hpc-build-image.bat`, `hpc-create-container.bat` and `hpc-start-container.bat`. The screenshots below show the expected behavior respectively (folder names may vary, I have used c:\git\Docker2 as my base folder).
 
 ![hpc-build-image](https://user-images.githubusercontent.com/16119641/95837809-54b33c80-0d41-11eb-8440-7519cede6621.png)
 
@@ -34,9 +34,9 @@ For Windows users, navigate to the `Windows` directory and then run `hpc-build-i
 
 For Linux and MacOS users, remain in this folder, run `hpc-build-image`, `hpc-create-container` and `hpc-start-container`.
 
-# Pulling and building hello world examples for the course 050 - Parallel and Distrubuted Systems
+# Pulling & building hello world examples for the course 050 - Parallel & Distrubuted Systems
 
-After succesfully having build, created and ran the container, you should be able to see the following screen, called Welcome screen :)
+After succesfully having built, created and ran the container, you should be able to see the following screen, aka `welcome screen`.
 
 ![2020-10-13_10h54_58](https://user-images.githubusercontent.com/16119641/95838920-a8725580-0d42-11eb-9162-ca366f81d73b.png)
 
