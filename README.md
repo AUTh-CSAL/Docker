@@ -40,5 +40,12 @@ After succesfully having built, created and ran the container, you should be abl
 
 ![2020-10-13_10h54_58](https://user-images.githubusercontent.com/16119641/95838920-a8725580-0d42-11eb-9162-ca366f81d73b.png)
 
-Then you can navigate to 
+Then you can clone our `pds-codebase` repo by envoking the command `git clone https://github.com/AUTh-csal/pds-codebase.git` inside the container, as shown in the screenshow below.
+
+![2020-10-13_11h08_27](https://user-images.githubusercontent.com/16119641/95840645-b4f7ad80-0d44-11eb-9f05-dfa6abcc67a4.png)
+
+Then you can `cd` into the new folder by `cd pds-codebase` and do a `make all` and `make test` and you should be able to build all the hello world examples and run their respective tests as show below.
+
+![2020-10-13_11h12_08](https://user-images.githubusercontent.com/16119641/95840842-f5efc200-0d44-11eb-89a6-63929eb11d1d.png)
+
 
