@@ -28,6 +28,9 @@ For Windows users, navigate to the `Windows` directory and then run `hpc-build-i
 
 ![2020-10-13_10h37_49](https://user-images.githubusercontent.com/16119641/95837809-54b33c80-0d41-11eb-8440-7519cede6621.png)
 
+![2020-10-13_10h38_37](https://user-images.githubusercontent.com/16119641/95837999-8cba7f80-0d41-11eb-9af9-5e94f56f3ceb.png)
+
+
 For Linux and MacOS users, remain in this folder, run `hpc-build-image`, `hpc-create-container` and `hpc-start-container`.
 
 # Pulling and building hello world examples for the course 050 - Parallel and Distrubuted Systems
