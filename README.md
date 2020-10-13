@@ -36,9 +36,9 @@ For Linux and MacOS users, remain in this folder, run `hpc-build-image`, `hpc-cr
 
 # Pulling and building hello world examples for the course 050 - Parallel and Distrubuted Systems
 
-After succesfully having build, created and ran the container, you should be able to see the following screen.
+After succesfully having build, created and ran the container, you should be able to see the following screen, called Welcome screen :)
 
-screenshot 1
+![2020-10-13_10h54_58](https://user-images.githubusercontent.com/16119641/95838920-a8725580-0d42-11eb-9162-ca366f81d73b.png)
 
-then you can navigate to 
+Then you can navigate to 
 
