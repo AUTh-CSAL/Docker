@@ -32,8 +32,6 @@ RUN apt-get update && apt-get install -y \
     clang-format \
     clang-tidy \
     ca-certificates \
-#    doxygen graphviz\
-#    libgeotiff-dev\
     automake\
     colordiff\
     openmpi-bin\ 
