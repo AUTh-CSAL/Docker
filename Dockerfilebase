@@ -1,0 +1,49 @@
+# This file builds the Docker image for the CSAL Unified Development Enviroment
+
+# Use Official Ubuntu base image
+FROM ubuntu:18.04
+
+# Set some variables
+ENV USER csal
+ENV HOME /home/$USER
+ENV DIR pds
+
+# Avoid stall during installation of tzdata
+ENV TZ=Europe/Athens
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Update and upgrade
+RUN apt-get update && apt-get upgrade -y
+
+# Install basic dependencies
+RUN apt-get -y install locales sudo build-essential openssh-server
+
+# Install libraries usef
+RUN apt-get update && apt-get install -y \
+     gcc \
+    clang-format \
+    clang-tidy \
+    ca-certificates \
+    automake\
+    colordiff
+
+# Install git with lfs support and other packages needed
+RUN apt-get update && apt-get install -y git git-lfs dos2unix nano rsync wget curl fish
+
+# Add user and change to user
+RUN useradd -m $USER -G sudo && \
+    echo "$USER:$USER" | chpasswd && \
+    echo "$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+USER $USER
+
+# Create shared volume
+VOLUME $HOME/$DIR
+WORKDIR $HOME/$DIR
+
+# Generate welcome message printed at login
+COPY Welcome $HOME/.welcome
+RUN echo "cat $HOME/.welcome" >> $HOME/.bashrc
+
+# Start bash login shell
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
+CMD ["/bin/bash", "-i"]
