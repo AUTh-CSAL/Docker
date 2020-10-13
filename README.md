@@ -26,6 +26,8 @@ Afterwards, by opening a terminal or Command Prompt, according to your host OS, 
 ```
 For Windows users, navigate to the `Windows` directory and then run `hpc-build-image.bat`, `hpc-create-container.bat` and `hpc-start-container.bat`. The screenshots below show the expected behavior.
 
+![2020-10-13_10h37_49](https://user-images.githubusercontent.com/16119641/95837809-54b33c80-0d41-11eb-8440-7519cede6621.png)
+
 For Linux and MacOS users, remain in this folder, run `hpc-build-image`, `hpc-create-container` and `hpc-start-container`.
 
 # Pulling and building hello world examples for the course 050 - Parallel and Distrubuted Systems
