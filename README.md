@@ -23,7 +23,7 @@ Afterwards, by opening a terminal or Command Prompt, according to your host OS, 
 2020-09-29  08:57               786 Welcome
 2020-09-29  08:57    <DIR>          Windows
 ```
-For Windows users, navigate to the `Windows` directory and then run `hpc-build-image.bat`, `hpc-create-container.bat` and `hpc-start-container.bat`. The screenshots below show the expected behavior respectively (folder names may vary, I have used c:\git\Docker2 as my base folder).
+For Windows users, navigate to the `Windows` directory and then run `hpc-build-image.bat`, `hpc-create-container.bat` and `hpc-start-container.bat`. The screenshots below show the expected behavior respectively (folder names may vary, I have used `c:\git\Docker2` as my base folder).
 
 ![hpc-build-image](https://user-images.githubusercontent.com/16119641/95837809-54b33c80-0d41-11eb-8440-7519cede6621.png)
 
