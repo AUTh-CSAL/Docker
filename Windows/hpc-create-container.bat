@@ -1,3 +1,4 @@
+@echo off
 SET CURRENTDIR="%cd%"
 cd %~dp0..\..
 SET UPDIR="%cd%"
