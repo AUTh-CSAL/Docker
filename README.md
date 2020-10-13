@@ -1,7 +1,7 @@
 # Docker
 Docker image for providing a unified computing system
 
-# Installation
+# Installation of the CSAL Docker image
 
 Note: This README assumes that there is already Docker installed on the host machine, either Windows, MacOS or Linux. For more info on how to obtain Docker, please visit:
 
@@ -24,6 +24,15 @@ Afterwards, by opening a terminal or Command Prompt, according to your host OS, 
 2020-09-29  08:57               786 Welcome
 2020-09-29  08:57    <DIR>          Windows
 ```
-For Windows users, navigate to the `Windows` directory and then run `hpc-build-image.bat`, `hpc-create-container.bat` and `hpc-start-container.bat`.
+For Windows users, navigate to the `Windows` directory and then run `hpc-build-image.bat`, `hpc-create-container.bat` and `hpc-start-container.bat`. The screenshots below show the expected behavior.
 
 For Linux and MacOS users, remain in this folder, run `hpc-build-image`, `hpc-create-container` and `hpc-start-container`.
+
+# Pulling and building hello world examples for the course 050 - Parallel and Distrubuted Systems
+
+After succesfully having build, created and ran the container, you should be able to see the following screen.
+
+screenshot 1
+
+then you can navigate to 
+
