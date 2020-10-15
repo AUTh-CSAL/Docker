@@ -1,2 +1,42 @@
 #!/usr/bin/env bash
-docker build -t hpcimage .
+
+## Exit Codes
+# 0 - everything run correctly
+# 1 - Neither docker or podman are installed or can be used
+
+
+use_docker=0
+use_podman=0
+
+# Check if docker is installed on the user's machine
+if [ -x "$(command -v docker)" ]; then
+    # Check if the user's machines has unified cgroup hierarchy
+    # This check is sufficient as the structure of the /sys/fs/cgroup
+    # directory differs from cgroup v1 to cgroup v2. 
+    if [ -f "/sys/fs/cgroup/cgroup.controllers" ]; then
+        echo "Docker doesn't support cgroup v2 yet."
+    else
+        use_docker=1
+    fi
+fi
+# Check if podman is installed
+if [ -x "$(command -v podman)" ]; then
+    # Check if docker is also installed and checked for use
+    # Installation should default to docker and use podman 
+    # only when cgroup v2 is enabled on the host machine
+    if [ "$use_docker"  == "0" ]; then 
+        use_podman=1
+    fi
+fi
+
+if [ "$use_docker" == "1" ] && [ "$use_podman" == "0" ]; then
+    `echo "$(command -v docker)"` `echo "build -t hpcimage ."`
+elif [ "$use_docker" == "0" ] && [ "$use_podman" == "1" ]; then
+    #Check if podman-compose is installed
+    `echo "$(command -v podman)"` `echo "build -t hpcimage ."`
+elif [ "$use_docker" == "0" ] && [ "$use_podman" == "0" ]; then
+  echo "Neither docker or podman is installed or can be used. Exiting abruptly..."
+  exit 1
+fi
+
+exit 0
