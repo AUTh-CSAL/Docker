@@ -30,10 +30,14 @@ RUN apt-get update && apt-get upgrade -y && \
     colordiff\
     openmpi-bin\ 
     libopenmpi-dev \ 
+    libopenblas-dev \
     # Install git with lfs support and other packages needed
     git git-lfs dos2unix nano rsync wget curl fish && \
     # Get and extract OpenCilk
-    wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fbeta3/OpenCilk-9.0.1-Linux.tar.gz && tar xvzf OpenCilk-9.0.1-Linux.tar.gz && \ 
+    # sends output to /dev/null so that it doesn't thrash 
+    # terminal output with download progress.   
+    wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fbeta3/OpenCilk-9.0.1-Linux.tar.gz >> /dev/null && \
+    tar xvzf OpenCilk-9.0.1-Linux.tar.gz >> /dev/null && \ 
     mv OpenCilk-9.0.1-Linux/ /usr/local/ && chmod og+xr /usr/local/OpenCilk-9.0.1-Linux/ -R && mkdir -p /julia
 
 # Get and extract Julia
@@ -49,7 +53,7 @@ ENV JULIA_VERSION 1.5.2
 
 WORKDIR /julia
 COPY julia_script.sh . 
-RUN sh julia_script.sh
+RUN sh julia_script.sh >> /dev/null
 # Add user and change to user
 RUN useradd -m $USER -G sudo && \
     echo "$USER:$USER" | chpasswd && \
