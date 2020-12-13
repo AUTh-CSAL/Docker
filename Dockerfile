@@ -35,7 +35,8 @@ RUN apt-get update && apt-get install -y \
     automake\
     colordiff\
     openmpi-bin\ 
-    libopenmpi-dev 
+    libopenmpi-dev\
+    libopenblas-dev
 
 # Install git with lfs support and other packages needed
 RUN apt-get update && apt-get install -y git git-lfs dos2unix nano rsync wget curl fish
