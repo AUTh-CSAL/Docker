@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+docker pull authcsal/docker:latestgithubbase &&
+docker tag authcsal/docker:latestgithubbase hpcimage &&
+docker rmi -f authcsal/docker:latestgithubbase
