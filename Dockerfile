@@ -116,5 +116,6 @@ COPY Welcome $HOME/.welcome
 RUN echo "cat $HOME/.welcome" >> $HOME/.bashrc
 
 # Start bash login shell
-ENTRYPOINT ["/bin/bash", "-l", "-c"]
+COPY docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["/bin/bash", "-i"]
