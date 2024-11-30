@@ -1,26 +1,40 @@
 # This file builds the Docker image for the CSAL Unified Development Enviroment
 
+ARG DEBIAN_FRONTEND=noninteractive
+ARG OPENCILK_VERSION=2.1.0
+
+FROM ubuntu:24.04 AS opencilk
+ARG DEBIAN_FRONTEND
+ARG OPENCILK_VERSION
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y curl && \
+    curl -sLf -o opencilk.tar.gz https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv2.1/opencilk-${OPENCILK_VERSION}-x86_64-linux-gnu-ubuntu-22.04.tar.gz >> /dev/null && \
+    tar xvzf opencilk.tar.gz >> /dev/null && \ 
+    rm opencilk.tar.gz && \
+    mv opencilk-${OPENCILK_VERSION}-x86_64-linux-gnu-ubuntu-22.04/ /usr/local/ && \
+    chmod og+xr /usr/local/opencilk-${OPENCILK_VERSION}-x86_64-linux-gnu-ubuntu-22.04/ -R
+
 # Use Official Ubuntu base image
-FROM ubuntu:18.04
+FROM ubuntu:24.04 AS final
 
 # Set some variables
-ENV USER csal
-ENV HOME /home/$USER
-ENV DIR pds
+ARG USER=csal
+ENV HOME=/home/$USER
+ENV DIR=pds
+ARG DEBIAN_FRONTEND
+ARG JULIA_VERSION=1.11.1
+ARG OPENCILK_VERSION
 
-# Avoid stall during installation of tzdata
-ENV TZ=Europe/Athens
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+COPY --chown=${USER}:${USER} Welcome ${HOME}/.welcome
+COPY --from=opencilk /usr/local/opencilk-${OPENCILK_VERSION}-x86_64-linux-gnu-ubuntu-22.04/ /usr/local/opencilk-${OPENCILK_VERSION}-x86_64-linux-gnu-ubuntu-22.04/
 
 # Update and upgrade
-RUN apt-get update && apt-get upgrade -y
-
-# Install basic dependencies
-RUN apt-get -y install locales sudo build-essential openssh-server
-
-# Install libraries usef
-RUN apt-get update && apt-get install -y \
-     gcc \
+RUN apt-get update && apt-get upgrade -y && \
+    # Install basic dependencies
+    apt-get -y install locales sudo build-essential openssh-server \
+    # Install libraries usef
+    gcc \
 #    nlohmann-json-dev \
 #    libshp-dev \
 #    liblas-dev \   #need to build from source to support LASZip
@@ -36,84 +50,26 @@ RUN apt-get update && apt-get install -y \
     colordiff\
     openmpi-bin\ 
     libopenmpi-dev\
-    libopenblas-dev
+    libopenblas-dev\ 
+    # Install git with lfs support and other packages needed
+    git git-lfs dos2unix nano rsync curl fish && \
+    # Get and extract OpenCilk
+    # sends output to /dev/null so that it doesn't thrash 
+    # terminal output with download progress.   
+    curl -fsSL https://install.julialang.org | sh -s -- --yes --default-channel ${JULIA_VERSION} && \
+    # Add user and change to user
+    useradd -m -G sudo ${USER} && \
+    echo "${USER}:${USER}" | chpasswd && \
+    echo "${USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    chown -R ${USER}:${USER} ${HOME} && \
+    echo "cat ${HOME}/.welcome" >> ${HOME}/.bashrc && \
+    echo "PATH=\$PATH:${HOME}/.juliaup/bin:/usr/local/opencilk-${OPENCILK_VERSION}-x86_64-linux-gnu-ubuntu-22.04/bin" >> ${HOME}/.bashrc
 
-# Install git with lfs support and other packages needed
-RUN apt-get update && apt-get install -y git git-lfs dos2unix nano rsync wget curl fish
-
-# Get and extract OpenCilk
-RUN wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fbeta3/OpenCilk-9.0.1-Linux.tar.gz && tar xvzf OpenCilk-9.0.1-Linux.tar.gz 
-RUN mv OpenCilk-9.0.1-Linux/ /usr/local/ && chmod og+xr /usr/local/OpenCilk-9.0.1-Linux/ -R
-
-# Get and extract Julia
-ENV JULIA_PATH /usr/local/julia
-ENV PATH $JULIA_PATH/bin:$PATH
-
-# https://julialang.org/juliareleases.asc
-# Julia (Binary signing key) <buildbot@julialang.org>
-##ENV JULIA_GPG 3673DF529D9049477F76B37566E3C7DC03D6E495
-
-# https://julialang.org/downloads/
-##ENV JULIA_VERSION 1.5.2
-
-##RUN set -eux; \
-##    \
-##    savedAptMark="$(apt-mark showmanual)"; \
-##    if ! command -v gpg > /dev/null; then \
-##        apt-get update; \
-##       apt-get install -y --no-install-recommends \
-##            gnupg \
-##            dirmngr \
-##        ; \
-##        rm -rf /var/lib/apt/lists/*; \
-##    fi; \
-##    \
-# https://julialang.org/downloads/#julia-command-line-version
-# https://julialang-s3.julialang.org/bin/checksums/julia-1.5.1.sha256
-# this "case" statement is generated via "update.sh"
-##    dpkgArch="$(dpkg --print-architecture)"; \
-##    case "${dpkgArch##*-}" in \
-# amd64
-##        amd64) tarArch='x86_64'; dirArch='x64'; sha256='6da704fadcefa39725503e4c7a9cfa1a570ba8a647c4bd8de69a118f43584630' ;; \
-##        *) echo >&2 "error: current architecture ($dpkgArch) does not have a corresponding Julia binary release"; exit 1 ;; \
-##    esac; \
-##    \
-##    folder="$(echo "$JULIA_VERSION" | cut -d. -f1-2)"; \
-##    curl -fL -o julia.tar.gz.asc "https://julialang-s3.julialang.org/bin/linux/${dirArch}/${folder}/julia-${JULIA_VERSION}-linux-${tarArch}.tar.gz.asc"; \
-##    curl -fL -o julia.tar.gz     "https://julialang-s3.julialang.org/bin/linux/${dirArch}/${folder}/julia-${JULIA_VERSION}-linux-${tarArch}.tar.gz"; \
-##    \
-##    echo "${sha256} *julia.tar.gz" | sha256sum -c -; \
-##    \
-##    export GNUPGHOME="$(mktemp -d)"; \
-##    gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$JULIA_GPG"; \
-##    gpg --batch --verify julia.tar.gz.asc julia.tar.gz; \
-##    command -v gpgconf > /dev/null && gpgconf --kill all; \
-##    rm -rf "$GNUPGHOME" julia.tar.gz.asc; \
-##    \
-##    mkdir "$JULIA_PATH"; \
-##    tar -xzf julia.tar.gz -C "$JULIA_PATH" --strip-components 1; \
-##    rm julia.tar.gz; \
-##    \
-##    apt-mark auto '.*' > /dev/null; \
-##    [ -z "$savedAptMark" ] || apt-mark manual $savedAptMark; \
-##    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-##    \
-# smoke test
-##    julia --version
-
-# Add user and change to user
-RUN useradd -m $USER -G sudo && \
-    echo "$USER:$USER" | chpasswd && \
-    echo "$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER $USER
 
 # Create shared volume
-VOLUME $HOME/$DIR
-WORKDIR $HOME/$DIR
-
-# Generate welcome message printed at login
-COPY Welcome $HOME/.welcome
-RUN echo "cat $HOME/.welcome" >> $HOME/.bashrc
+VOLUME ${HOME}/${DIR}
+WORKDIR ${HOME}/${DIR}
 
 # Start bash login shell
 COPY docker-entrypoint.sh /usr/local/bin/
