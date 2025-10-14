@@ -1,7 +1,7 @@
 # This file builds the Docker image for the CSAL Unified Development Enviroment
 
 # Use Official Ubuntu base image
-FROM ubuntu:18.04
+FROM ubuntu:24.04
 
 # Set some variables
 ENV USER csal
@@ -42,8 +42,10 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update && apt-get install -y git git-lfs dos2unix nano rsync wget curl fish
 
 # Get and extract OpenCilk
-RUN wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fbeta3/OpenCilk-9.0.1-Linux.tar.gz && tar xvzf OpenCilk-9.0.1-Linux.tar.gz 
-RUN mv OpenCilk-9.0.1-Linux/ /usr/local/ && chmod og+xr /usr/local/OpenCilk-9.0.1-Linux/ -R
+# RUN wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fbeta3/OpenCilk-9.0.1-Linux.tar.gz && tar xvzf OpenCilk-9.0.1-Linux.tar.gz 
+# RUN mv OpenCilk-9.0.1-Linux/ /usr/local/ && chmod og+xr /usr/local/OpenCilk-9.0.1-Linux/ -R
+RUN wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk%2Fv3.0/opencilk-3.0.0-x86_64-linux-gnu-ubuntu-24.04.tar.gz  && tar xvzf opencilk-3.0.0-x86_64-linux-gnu-ubuntu-24.04.tar.gz
+RUN mv opencilk-3.0.0-x86_64-linux-gnu-ubuntu-24.04/ /usr/local/ && chmod og+xr /usr/local/opencilk-3.0.0-x86_64-linux-gnu-ubuntu-24.04/ -R
 
 # Get and extract Julia
 ENV JULIA_PATH /usr/local/julia
