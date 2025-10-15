@@ -48,8 +48,8 @@ RUN wget https://github.com/OpenCilk/opencilk-project/releases/download/opencilk
 RUN mv opencilk-3.0.0-x86_64-linux-gnu-ubuntu-24.04/ /usr/local/ && chmod og+xr /usr/local/opencilk-3.0.0-x86_64-linux-gnu-ubuntu-24.04/ -R
 
 # Get and extract Julia
-ENV JULIA_PATH /usr/local/julia
-ENV PATH $JULIA_PATH/bin:$PATH
+# ENV JULIA_PATH /usr/local/julia
+# ENV PATH $JULIA_PATH/bin:$PATH
 
 # https://julialang.org/juliareleases.asc
 # Julia (Binary signing key) <buildbot@julialang.org>
